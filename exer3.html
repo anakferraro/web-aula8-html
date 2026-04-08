@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste</title>
+
+    <script>
+        let numeros = [];
+
+        window.onload = function () {
+            document.getElementById("guardar").onclick = guardar;
+            document.getElementById("adicionar").onclick = adicionar;
+            document.getElementById("retirar").onclick = retirar;
+            document.getElementById("limpar").onclick = limpar;
+            document.getElementById("mostrar").onclick = mostrar;
+        }
+
+        function pegarNumero() {
+            let valor = document.getElementById("numero").value;
+            return parseFloat(valor);
+        }
+
+        function guardar() {
+            let num = pegarNumero();
+            if (!isNaN(num)) {
+                numeros = [num];
+            }
+        }
+
+        function adicionar() {
+            let num = pegarNumero();
+            if (!isNaN(num)) {
+                numeros.push(num);
+            }
+        }
+
+        function retirar() {
+            numeros.pop();
+        }
+
+        function limpar() {
+            numeros = [];
+            document.getElementById("saida").innerHTML = "";
+        }
+
+        function mostrar() {
+            document.getElementById("saida").innerHTML = numeros.join(", ");
+        }
+    </script>
+</head>
+
+<body>
+
+    <label>Numero:</label>
+    <input type="text" id="numero">
+
+    <br><br>
+
+    <button id="guardar">Guardar</button><br>
+    <button id="adicionar">Adicionar</button><br>
+    <button id="retirar">Retirar</button><br>
+    <button id="limpar">Limpar</button><br>
+    <button id="mostrar">Mostrar</button>
+
+    <p id="saida"></p>
+
+</body>
+</html>
