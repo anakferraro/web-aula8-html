@@ -2,67 +2,66 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Teste</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS - Exercício 3</title>
+    <style>
+        h1 { color: lightgreen; }
+    </style>
     <script>
-        let numeros = [];
+        let memoria = null;
 
-        window.onload = function () {
-            document.getElementById("guardar").onclick = guardar;
-            document.getElementById("adicionar").onclick = adicionar;
-            document.getElementById("retirar").onclick = retirar;
-            document.getElementById("limpar").onclick = limpar;
-            document.getElementById("mostrar").onclick = mostrar;
+        window.onload = inicio;
+
+        function inicio() {
+            document.getElementById('btn_guardar').addEventListener('click', guardar);
+            document.getElementById('btn_adicionar').addEventListener('click', adicionar);
+            document.getElementById('btn_reduzir').addEventListener('click', reduzir);
+            document.getElementById('btn_limpar').addEventListener('click', limpar);
         }
 
-        function pegarNumero() {
-            let valor = document.getElementById("numero").value;
-            return parseFloat(valor);
+        function getValor() {
+            let digitado = document.getElementById('numero').value;
+            return parseInt(digitado);
+        }
+
+        function atualizar(msg) {
+            document.getElementById('saida').innerHTML =
+                `Memória: ${memoria} | ${msg}`;
         }
 
         function guardar() {
-            let num = pegarNumero();
-            if (!isNaN(num)) {
-                numeros = [num];
-            }
+            memoria = getValor();
+            atualizar(`Valor ${memoria} guardado na memória.`);
         }
 
         function adicionar() {
-            let num = pegarNumero();
-            if (!isNaN(num)) {
-                numeros.push(num);
-            }
+            let valor = getValor();
+            memoria = memoria + valor;
+            atualizar(`Adicionado ${valor}. Novo valor: ${memoria}`);
         }
 
-        function retirar() {
-            numeros.pop();
+        function reduzir() {
+            let valor = getValor();
+            memoria = memoria - valor;
+            atualizar(`Reduzido ${valor}. Novo valor: ${memoria}`);
         }
 
         function limpar() {
-            numeros = [];
-            document.getElementById("saida").innerHTML = "";
-        }
-
-        function mostrar() {
-            document.getElementById("saida").innerHTML = numeros.join(", ");
+            memoria = null;
+            atualizar('Memória limpa.');
         }
     </script>
 </head>
-
 <body>
-
-    <label>Numero:</label>
-    <input type="text" id="numero">
-
+    <h1>Aprendendo JS</h1>
+    <label for="numero">Valor:</label>
+    <input type="number" id="numero">
     <br><br>
-
-    <button id="guardar">Guardar</button><br>
-    <button id="adicionar">Adicionar</button><br>
-    <button id="retirar">Retirar</button><br>
-    <button id="limpar">Limpar</button><br>
-    <button id="mostrar">Mostrar</button>
-
+    <button id="btn_guardar">Guardar na memória</button>
+    <button id="btn_adicionar">Adicionar à memória</button>
+    <button id="btn_reduzir">Reduzir da memória</button>
+    <button id="btn_limpar">Limpar memória</button>
     <p id="saida"></p>
-
 </body>
+</html>
 </html>
